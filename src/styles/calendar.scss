@@ -1,15 +1,17 @@
 .calendar {
+  padding: 0 $container-padding;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: $items-gap;
-  width: ($block-width * 7) + ($items-gap * 6);
+  width: ($block-size * 7) + ($items-gap * 6);
 
   @each $day in $days {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: (
-        $start-value * $block-height + ($start-value - 1) * $items-gap
-      );
+      $full-blocks-size: $start-value * $block-size;
+      $full-gaps-size: ($start-value - 1) * $items-gap;
+
+      margin-left: ($full-blocks-size + $full-gaps-size);
     }
 
     $start-value: $start-value + 1;
@@ -29,13 +31,13 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    width: $block-width;
-    height: $block-height;
+    width: $block-size;
+    height: $block-size;
     box-sizing: border-box;
-    border: 1px solid black;
+    border: $border-width solid $border-color;
     background-color: $grey-accent;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
+    font-size: $number-font-size;
 
     &::before {
       content: '';
@@ -53,5 +55,7 @@
       transform: translate(0, -20px);
       transition-duration: 0.5s;
     }
+
+    transition-duration: 0.5s;
   }
 }
