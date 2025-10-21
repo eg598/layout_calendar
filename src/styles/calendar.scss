@@ -2,19 +2,26 @@
   padding: 0 $container-padding;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   flex-wrap: wrap;
   gap: $items-gap;
-  width: ($block-size * 7) + ($items-gap * 6);
+  width: (($block-size * 7) + ($items-gap * 6) + ($container-padding * 2));
 
-  @each $day in $days {
-    &--start-day-#{$day} .calendar__day:first-child {
-      $full-blocks-size: $start-value * $block-size;
-      $full-gaps-size: ($start-value - 1) * $items-gap;
+  // @each $day in $days {
+  //   &--start-day-#{$day} .calendar__day:first-child {
+  //     $full-blocks-size: $start-value * $block-size;
+  //     $full-gaps-size: ($start-value - 1) * $items-gap;
 
-      margin-left: ($full-blocks-size + $full-gaps-size);
+  //     margin-left: ($full-blocks-size + $full-gaps-size);
+  //   }
+
+  //   $start-value: $start-value + 1;
+  // }
+
+  @for $i from 1 through length($days) {
+    &--start-day-#{nth($days, $i)} .calendar__day:first-child {
+      margin-left: (($i - 1) * ($block-size + $items-gap));
     }
-
-    $start-value: $start-value + 1;
   }
 
   @for $i from 28 to 32 {
